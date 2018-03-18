@@ -3,14 +3,14 @@ using namespace std;
 #include<vector>
 #include<stack>
 
-// 1.Ã°ÅİÅÅĞòÊµÏÖ
+// 1.å†’æ³¡æ’åºå®ç°
 vector<int > BubbleSort(vector<int > array)
 {
-	int len = array.size(); // ¼ÆËãÊı×é³¤¶È
-	for(int i=0;i<len-1;i++) // ±éÀúlen-1±é
+	int len = array.size(); // è®¡ç®—æ•°ç»„é•¿åº¦
+	for(int i=0;i<len-1;i++) // éå†len-1é
 	{
-		bool isSorted = true; // ÉèÖÃÒ»¸ö±äÁ¿À´±êÊ¶µ±Ç°Êı×éÊÇ·ñÒÑ¾­ÓĞĞò
-		for(int j=0;j<len-1-i;j++) // ´ÓµÚÒ»¸öÔªËØ¿ªÊ¼±È½Ï£¬Ò»Ö±±éÀúµ½len-1-i-1
+		bool isSorted = true; // è®¾ç½®ä¸€ä¸ªå˜é‡æ¥æ ‡è¯†å½“å‰æ•°ç»„æ˜¯å¦å·²ç»æœ‰åº
+		for(int j=0;j<len-1-i;j++) // ä»ç¬¬ä¸€ä¸ªå…ƒç´ å¼€å§‹æ¯”è¾ƒï¼Œä¸€ç›´éå†åˆ°len-1-i-1
 		{
 			if(array[j]>array[j+1])
 			{
@@ -21,56 +21,56 @@ vector<int > BubbleSort(vector<int > array)
 			}
 		}
 		if(isSorted==true)
-			break; // µ±Ç°Êı×éÒÑ¾­ÓĞĞò£¬Í£Ö¹±éÀú
+			break; // å½“å‰æ•°ç»„å·²ç»æœ‰åºï¼Œåœæ­¢éå†
 	}
 	return array;
 }
 
-// 2.1 ¿ìÅÅÊµÏÖ(µİ¹é)
+// 2.1 å¿«æ’å®ç°(é€’å½’)
 int partition(vector<int> &array, int begin, int end)
 {
 	int mid = (begin + end ) / 2;
-	int temp = array[mid] ; // Ëæ»úÑ¡ÔñÒ»¸öÔªËØ£¬ÕâÀïÑ¡ÔñÖĞ¼äÔªËØ£¬²¢¶ÔÆäÉèÖÃÒ»¸öÉÚÎ»
+	int temp = array[mid] ; // éšæœºé€‰æ‹©ä¸€ä¸ªå…ƒç´ ï¼Œè¿™é‡Œé€‰æ‹©ä¸­é—´å…ƒç´ ï¼Œå¹¶å¯¹å…¶è®¾ç½®ä¸€ä¸ªå“¨ä½
 	array[mid] = array[end]; 
-	// ÉèÖÃÉÚÎ»µÄ×÷ÓÃÊÇ½«×îºóÒ»¸öÔªËØ·ÅÖÃÔÚËæ»úÑ¡ÔñµÄÔªËØ£¨ÕâÀïÊÇÖĞ¼äÔªËØ£©ÉÏ£¬°Ñ×îºóÄÇ¸öÎ»ÖÃ¿Õ³öÀ´
+	// è®¾ç½®å“¨ä½çš„ä½œç”¨æ˜¯å°†æœ€åä¸€ä¸ªå…ƒç´ æ”¾ç½®åœ¨éšæœºé€‰æ‹©çš„å…ƒç´ ï¼ˆè¿™é‡Œæ˜¯ä¸­é—´å…ƒç´ ï¼‰ä¸Šï¼ŒæŠŠæœ€åé‚£ä¸ªä½ç½®ç©ºå‡ºæ¥
 	int i = begin;
 	int j = end;
 	while(i<j)
 	{
-		while(i<j&&array[i]<=temp) // ´ÓÇ°ÃæÕÒµ½´óÓÚ¸ÃÔªËØµÄÔªËØ
+		while(i<j&&array[i]<=temp) // ä»å‰é¢æ‰¾åˆ°å¤§äºè¯¥å…ƒç´ çš„å…ƒç´ 
 			i++;
 		array[j] =array[i];
-		while(j>i&&array[j]>temp) // ´ÓºóÃæÕÒµ½Ğ¡ÓÚ»òµÈÓÚ¸ÃÔªËØµÄÔªËØ
+		while(j>i&&array[j]>temp) // ä»åé¢æ‰¾åˆ°å°äºæˆ–ç­‰äºè¯¥å…ƒç´ çš„å…ƒç´ 
 			j--;
 		array[i] = array[j];
 	}
 	array[i] = temp;
-	return i; // ·µ»ØÖ®Ç°Ñ¡ÔñµÄÔªËØ×îÖÕ·ÅÖÃµÄÎ»ÖÃ
+	return i; // è¿”å›ä¹‹å‰é€‰æ‹©çš„å…ƒç´ æœ€ç»ˆæ”¾ç½®çš„ä½ç½®
 }
 
 void QuickSort(vector<int > &array, int begin, int end)
 {
 	if(begin>=end)
 		return ;
-	// µ÷ÓÃpartitionº¯ÊıµÃµ½Ëæ»úÔªËØ¾­¹ıÒ»´Î¿ìÅÅºó×îÖÕ·ÅÖÃµÄÎ»ÖÃ
+	// è°ƒç”¨partitionå‡½æ•°å¾—åˆ°éšæœºå…ƒç´ ç»è¿‡ä¸€æ¬¡å¿«æ’åæœ€ç»ˆæ”¾ç½®çš„ä½ç½®
 	int index = partition(array, begin, end); 
 	QuickSort(array,begin,index-1);
 	QuickSort(array,index+1,end);
 }
 
-// 2.2 ¿ìÅÅÊµÏÖ(·Çµİ¹é)
+// 2.2 å¿«æ’å®ç°(éé€’å½’)
 stack<int > waitSort;
 void QuickSort2(vector<int > &array, int begin, int end)
 {
 	if(begin>=end)
 		return ;
-	int index = partition(array, begin, end); // ½øĞĞÒ»´Î¿ìÅÅ
-	if(index-1>begin) // Èô×óÇø¼äĞèÒªÅÅĞò£¬ÈëÕ»
+	int index = partition(array, begin, end); // è¿›è¡Œä¸€æ¬¡å¿«æ’
+	if(index-1>begin) // è‹¥å·¦åŒºé—´éœ€è¦æ’åºï¼Œå…¥æ ˆ
 	{
-		waitSort.push(index-1); // ÓÉÓÚ¡°Õ»¡±ºó½øÏÈ³öµÄÌØµã£¬ÏÈÈëÇø¼äÓÒ¶Ëµã
+		waitSort.push(index-1); // ç”±äºâ€œæ ˆâ€åè¿›å…ˆå‡ºçš„ç‰¹ç‚¹ï¼Œå…ˆå…¥åŒºé—´å³ç«¯ç‚¹
 		waitSort.push(begin);
 	}
-	if(index+1<end) // ÈôÓÒÇø¼äĞèÒªÅÅĞò£¬ÈëÕ»
+	if(index+1<end) // è‹¥å³åŒºé—´éœ€è¦æ’åºï¼Œå…¥æ ˆ
 	{
 		waitSort.push(end);
 		waitSort.push(index+1);
@@ -81,10 +81,10 @@ void QuickSort2(vector<int > &array, int begin, int end)
 		waitSort.pop();
 		end = waitSort.top();
 		waitSort.pop();
-		index = partition(array, begin, end); // ½øĞĞÒ»´Î¿ìÅÅ
-		if(index-1>begin) // Èô×óÇø¼äĞèÒªÅÅĞò£¬ÈëÕ»
+		index = partition(array, begin, end); // è¿›è¡Œä¸€æ¬¡å¿«æ’
+		if(index-1>begin) // è‹¥å·¦åŒºé—´éœ€è¦æ’åºï¼Œå…¥æ ˆ
 		{
-			waitSort.push(index-1); // ÓÉÓÚ¡°Õ»¡±ºó½øÏÈ³öµÄÌØµã£¬ÏÈÈëÇø¼äÓÒ¶Ëµã
+			waitSort.push(index-1); // ç”±äºâ€œæ ˆâ€åè¿›å…ˆå‡ºçš„ç‰¹ç‚¹ï¼Œå…ˆå…¥åŒºé—´å³ç«¯ç‚¹
 			waitSort.push(begin);
 		}
 		if(index+1<end) 
@@ -95,15 +95,15 @@ void QuickSort2(vector<int > &array, int begin, int end)
 	}
 }
 
-// 3 ¼òµ¥Ñ¡ÔñÅÅĞò
+// 3 ç®€å•é€‰æ‹©æ’åº
 vector<int > SelectSort(vector<int > array)
 {
-	int len = array.size(); // ¼ÆËãÊı×é³¤¶È
-	for(int i=0;i<len-1;i++) // ±éÀún-1±é
+	int len = array.size(); // è®¡ç®—æ•°ç»„é•¿åº¦
+	for(int i=0;i<len-1;i++) // éå†n-1é
 	{
-		int max = array[0]; // ¼ÇÂ¼×î´óÖµ
-		int max_location = 0; // ×î´óÖµµÄÎ»ÖÃ
-		for(int j=0;j<len-i;j++) // Ã¿´Î±È½Ïµ½len-1-i
+		int max = array[0]; // è®°å½•æœ€å¤§å€¼
+		int max_location = 0; // æœ€å¤§å€¼çš„ä½ç½®
+		for(int j=0;j<len-i;j++) // æ¯æ¬¡æ¯”è¾ƒåˆ°len-1-i
 		{
 			if(array[j]>=max)
 			{
@@ -117,35 +117,39 @@ vector<int > SelectSort(vector<int > array)
 	return array;
 }
 
-// 4. ¶ÑÅÅĞò
-void AdjustHeap(vector<int > &array, int loc, int len) // µ÷Õû´ó¸ù¶Ñ,ÕâÀïÓÃµİ¹éÊµÏÖ
+// 4. å †æ’åº
+void AdjustHeap(vector<int > &array, int loc, int len) // è°ƒæ•´å¤§æ ¹å †,è¿™é‡Œç”¨é€’å½’å®ç°
 {
-	if(2*loc+1<=len && array[loc]<array[2*loc+1]) // Èç¹û×óº¢×Ó´æÔÚ,²¢ÇÒ¸Ã½áµãµÄÖµĞ¡ÓÚ×óº¢×ÓµÄÖµ£¬ĞèÒªµ÷Õû
+	int left = 2*loc + 1; // è®°å½•å·¦å­©å­çš„ä½ç½®
+	int right = 2*loc + 2; // è®°å½•å³å­©å­çš„ä½ç½®
+	int largest = loc; // è®°å½•å½“å‰ç»“ç‚¹ã€å·¦å­©å­ç»“ç‚¹ã€å³å­©å­ç»“ç‚¹ä¸­æœ€å¤§å€¼çš„ä½ç½®
+	if(left<=len && array[largest]<array[left]) // å¦‚æœå·¦å­©å­å­˜åœ¨,å¹¶ä¸”è¯¥ç»“ç‚¹çš„å€¼å°äºå·¦å­©å­çš„å€¼,æœ€å¤§å€¼ä¸ºå·¦å­©å­ç»“ç‚¹
 	{
-		int temp = array[loc];
-		array[loc] = array[2*loc+1];
-		array[2*loc+1] = temp;
-		AdjustHeap(array, 2*loc+1, len); // µİ¹éµ÷Õû×óº¢×Ó½áµã
+		largest = left;
 	}
-	if(2*loc+2<=len && array[loc]<array[2*loc+2]) // Èç¹ûÓÒº¢×Ó´æÔÚ,²¢ÇÒ¸Ã½áµãµÄÖµĞ¡ÓÚÓÒº¢×ÓµÄÖµ£¬ĞèÒªµ÷Õû
+	if(right<=len && array[largest]<array[right]) // å¦‚æœå³å­©å­å­˜åœ¨,å¹¶ä¸”è¯¥ç»“ç‚¹çš„å€¼å°äºå³å­©å­çš„å€¼ï¼Œæœ€å¤§å€¼ä¸ºå³å­©å­ç»“ç‚¹
+	{
+		largest = right;
+	}
+	if(largest!=loc) // åªæœ‰åœ¨å½“å‰ç»“ç‚¹ä¸æ˜¯æœ€å¤§å€¼çš„æƒ…å†µä¸‹æ‰éœ€è¦è¿›ä¸€æ­¥è°ƒæ•´
 	{
 		int temp = array[loc];
-		array[loc] = array[2*loc+2];
-		array[2*loc+2] = temp; 
-		AdjustHeap(array, 2*loc+2, len); // // µİ¹éµ÷ÕûÓÒº¢×Ó½áµã
+		array[loc] = array[largest];
+		array[largest] = temp; 
+		AdjustHeap(array, largest, len); // // é€’å½’è°ƒæ•´ä¸çˆ¶ç»“ç‚¹äº¤æ¢çš„é‚£ä¸ªå­©å­ç»“ç‚¹
 	}
 }
 
 void HeapSort(vector<int > &array)
 {
-	int len = array.size(); // ¼ÆËãÊı×é³¤¶È
-	/* ¹¹½¨´ó¸ù¶Ñ */
+	int len = array.size(); // è®¡ç®—æ•°ç»„é•¿åº¦
+	/* æ„å»ºå¤§æ ¹å † */
 	int i;
-	for(i=len/2-1;i>=0;i--)// ÓÉÓÚÒ¶×Ó½áµãÊÇ·ûºÏ´ó¸ù¶ÑµÄĞÔÖÊ£¬Òò´ËÖ»ĞèÒª´ÓµÚÒ»¸ö·ÇÒ¶×Ó½áµã½øĞĞµ÷Õû¼´¿É(n0=n2+1);
+	for(i=len/2-1;i>=0;i--)// ç”±äºå¶å­ç»“ç‚¹æ˜¯ç¬¦åˆå¤§æ ¹å †çš„æ€§è´¨ï¼Œå› æ­¤åªéœ€è¦ä»ç¬¬ä¸€ä¸ªéå¶å­ç»“ç‚¹è¿›è¡Œè°ƒæ•´å³å¯(n0=n2+1);
 		AdjustHeap(array,i,len);
 
-	// ¹¹½¨Íê³É£¬Óë×îºóÒ»¸öÔªËØ»¥»»£¬ÇÒ¸Ã¶ÑÊıÁ¿¼õÒ»
-	for(i=0;i<len-1;i++) // µ÷Õûn-1´Î£¬Ã¿´ÎµÃµ½Ò»¸öÊ£ÏÂÔªËØµÄ×î´óÖµ
+	// æ„å»ºå®Œæˆï¼Œä¸æœ€åä¸€ä¸ªå…ƒç´ äº’æ¢ï¼Œä¸”è¯¥å †æ•°é‡å‡ä¸€
+	for(i=0;i<len-1;i++) // è°ƒæ•´n-1æ¬¡ï¼Œæ¯æ¬¡å¾—åˆ°ä¸€ä¸ªå‰©ä¸‹å…ƒç´ çš„æœ€å¤§å€¼
 	{
 		int temp = array[0];
 		array[0] = array[len-1-i];
@@ -154,15 +158,15 @@ void HeapSort(vector<int > &array)
 	}
 }
 
-// 5 ²åÈëÅÅĞò
+// 5 æ’å…¥æ’åº
 void InsertSort(vector<int >&array)
 {
-	int len = array.size(); // ¼ÆËãÊı×é³¤¶È
-	for(int i= 1;i<len;i++) // ´ÓµÚ¶ş¸öÔªËØ¿ªÊ¼ÍùÇ°ÃæµÄÓĞĞòÊı×éÖĞ²åÈë
+	int len = array.size(); // è®¡ç®—æ•°ç»„é•¿åº¦
+	for(int i= 1;i<len;i++) // ä»ç¬¬äºŒä¸ªå…ƒç´ å¼€å§‹å¾€å‰é¢çš„æœ‰åºæ•°ç»„ä¸­æ’å…¥
 	{
 		int temp = array[i];
 		int j = i-1;
-		while(j>=0&&array[j]>temp) // ÕÒµ½µÚÒ»¸ö²»´óÓÚtempµÄÎ»ÖÃ
+		while(j>=0&&array[j]>temp) // æ‰¾åˆ°ç¬¬ä¸€ä¸ªä¸å¤§äºtempçš„ä½ç½®
 		{
 		
 			array[j+1] = array[j];
@@ -173,9 +177,9 @@ void InsertSort(vector<int >&array)
 	}
 }
 
-// 6 ÕÛ°ë²åÈëÅÅĞò£¨ÂÔ£©
+// 6 æŠ˜åŠæ’å…¥æ’åºï¼ˆç•¥ï¼‰
 
-// 7 Ï£¶ûÅÅĞò
+// 7 å¸Œå°”æ’åº
 void Print(vector<int >array)
 {
 	for(int i=0;i<array.size();i++)
@@ -183,19 +187,19 @@ void Print(vector<int >array)
 	cout<<endl;
 }
 
-void ShellSort(vector<int >&array) // »ù±¾Ï£¶ûÅÅĞò
+void ShellSort(vector<int >&array) // åŸºæœ¬å¸Œå°”æ’åº
 {
-	int len = array.size(); // ¼ÆËãÊı×é³¤¶È
-	int index = len / 2; // ÉèÖÃÔöÁ¿½øĞĞ·Ö×é£¬Ã¿×éÔªËØÖ®¼äÏà¸ôindex¸öÊı
+	int len = array.size(); // è®¡ç®—æ•°ç»„é•¿åº¦
+	int index = len / 2; // è®¾ç½®å¢é‡è¿›è¡Œåˆ†ç»„ï¼Œæ¯ç»„å…ƒç´ ä¹‹é—´ç›¸éš”indexä¸ªæ•°
 	while(index>=1)
 	{
-		for(int start=0;start<index;start++) // ´ú±íµ±Ç°Êı×é±»·Ö³Éindex×é£¬Ã¿×éµÄÆğÊ¼ÔªËØÔÚÔ­Êı×éÖĞµÄÎ»ÖÃÎªstart
+		for(int start=0;start<index;start++) // ä»£è¡¨å½“å‰æ•°ç»„è¢«åˆ†æˆindexç»„ï¼Œæ¯ç»„çš„èµ·å§‹å…ƒç´ åœ¨åŸæ•°ç»„ä¸­çš„ä½ç½®ä¸ºstart
 		{
-			for(int i= start+index;i<len;i=i+index) // ´ÓÃ¿×éµÚ¶ş¸öÔªËØ¿ªÊ¼ÍùÇ°ÃæµÄÓĞĞòÊı×éÖĞ²åÈë
+			for(int i= start+index;i<len;i=i+index) // ä»æ¯ç»„ç¬¬äºŒä¸ªå…ƒç´ å¼€å§‹å¾€å‰é¢çš„æœ‰åºæ•°ç»„ä¸­æ’å…¥
 			{
 				int temp = array[i];
 				int j = i-index;
-				while(j>=0&&array[j]>temp) // ÕÒµ½µÚÒ»¸ö²»´óÓÚtempµÄÎ»ÖÃ
+				while(j>=0&&array[j]>temp) // æ‰¾åˆ°ç¬¬ä¸€ä¸ªä¸å¤§äºtempçš„ä½ç½®
 				{
 				
 					array[j+index] = array[j];
@@ -204,22 +208,22 @@ void ShellSort(vector<int >&array) // »ù±¾Ï£¶ûÅÅĞò
 				array[j+index] = temp;	
 			}
 		}
-		index = index / 2; // ÔöÁ¿ÕÛ°ë¼õĞ¡
+		index = index / 2; // å¢é‡æŠ˜åŠå‡å°
 	}
 }
 
-void ShellSort2(vector<int >&array) // ¸Ä½øºóµÄÏ£¶ûÅÅĞò
+void ShellSort2(vector<int >&array) // æ”¹è¿›åçš„å¸Œå°”æ’åº
 {
-	int len = array.size(); // ¼ÆËãÊı×é³¤¶È
-	int index = len / 2; // ÉèÖÃÔöÁ¿½øĞĞ·Ö×é£¬Ã¿×éÔªËØÖ®¼äÏà¸ôindex¸öÊı
+	int len = array.size(); // è®¡ç®—æ•°ç»„é•¿åº¦
+	int index = len / 2; // è®¾ç½®å¢é‡è¿›è¡Œåˆ†ç»„ï¼Œæ¯ç»„å…ƒç´ ä¹‹é—´ç›¸éš”indexä¸ªæ•°
 	while(index>=1)
 	{
-		for(int i= index;i<len;i++) // ´ÓµÚindex¸öÔªËØ¿ªÊ¼ÍùÇ°ÃæµÄÓĞĞòÊı×éÖĞ²åÈë
-			                        //ºÍÖ±½Ó²åÈëË¼ÏëÀàËÆ£¬Ö»ÊÇÏàÁÚÔªËØÖ®¼äÏà¸ôindex¸öÔªËØ
+		for(int i= index;i<len;i++) // ä»ç¬¬indexä¸ªå…ƒç´ å¼€å§‹å¾€å‰é¢çš„æœ‰åºæ•°ç»„ä¸­æ’å…¥
+			                        //å’Œç›´æ¥æ’å…¥æ€æƒ³ç±»ä¼¼ï¼Œåªæ˜¯ç›¸é‚»å…ƒç´ ä¹‹é—´ç›¸éš”indexä¸ªå…ƒç´ 
 		{
 			int temp = array[i];
 			int j = i-index;
-			while(j>=0&&array[j]>temp) // ÕÒµ½µÚÒ»¸ö²»´óÓÚtempµÄÎ»ÖÃ
+			while(j>=0&&array[j]>temp) // æ‰¾åˆ°ç¬¬ä¸€ä¸ªä¸å¤§äºtempçš„ä½ç½®
 			{
 			
 				array[j+index] = array[j];
@@ -229,27 +233,27 @@ void ShellSort2(vector<int >&array) // ¸Ä½øºóµÄÏ£¶ûÅÅĞò
 			
 		}
 		//Print(array);
-		index = index / 2; // ÔöÁ¿ÕÛ°ë¼õÉÙ
+		index = index / 2; // å¢é‡æŠ˜åŠå‡å°‘
 	}
 }
 
 
-// 8. ¹é²¢ÅÅĞò
+// 8. å½’å¹¶æ’åº
 void Print(vector<int >array,int begin, int end)
 {
 	for(int i=begin;i<=end;i++)
 		cout<<array[i]<<ends;
 	cout<<endl;
 }
-void merge(vector<int> &array, int begin, int mid, int end) // ¶¨ÒåÒ»¸öº¯ÊıÓÃÓÚ¹é²¢£¬Ç°°ë¶ÎÎª[begin,mid], ºó°ë¶ÎÎª[mid+1,end]
+void merge(vector<int> &array, int begin, int mid, int end) // å®šä¹‰ä¸€ä¸ªå‡½æ•°ç”¨äºå½’å¹¶ï¼Œå‰åŠæ®µä¸º[begin,mid], ååŠæ®µä¸º[mid+1,end]
 {
-	vector<int > result ; // ¶¨ÒåĞÂµÄÊı×éÓÃÀ´±£´æ¹é²¢µÄ½á¹û
+	vector<int > result ; // å®šä¹‰æ–°çš„æ•°ç»„ç”¨æ¥ä¿å­˜å½’å¹¶çš„ç»“æœ
 	int i = begin;
 	int j = mid+1;
 	//Print(array, begin ,end);
 	while(i<=mid && j<=end)
 	{
-		if(array[i]<=array[j]) // È¡Ğ¡µÄ
+		if(array[i]<=array[j]) // å–å°çš„
 		{
 			result.push_back(array[i]);
 			i++;
@@ -260,34 +264,34 @@ void merge(vector<int> &array, int begin, int mid, int end) // ¶¨ÒåÒ»¸öº¯ÊıÓÃÓÚ¹
 			j++;
 		}
 	}
-	while(i<=mid) // Î´±È¶ÔÍêÔòÈ«²¿ÒÀ´Î¼ÓÈë½á¹ûÊı×é¼´¿É
+	while(i<=mid) // æœªæ¯”å¯¹å®Œåˆ™å…¨éƒ¨ä¾æ¬¡åŠ å…¥ç»“æœæ•°ç»„å³å¯
 		result.push_back(array[i++]);
-	while(j<=end) // ¸ÃwhileÓëÉÏÒ»¸öwhileÓĞÇÒ½öÓĞÒ»¸ö»áÖ´ĞĞ
+	while(j<=end) // è¯¥whileä¸ä¸Šä¸€ä¸ªwhileæœ‰ä¸”ä»…æœ‰ä¸€ä¸ªä¼šæ‰§è¡Œ
 		result.push_back(array[j++]);
 	j = 0;
 	for(i=begin;i<=end;i++)
-		array[i] = result[j++]; // °Ñ¹é²¢½á¹û¿½±´µ½Ô­Êı×éÖĞ
+		array[i] = result[j++]; // æŠŠå½’å¹¶ç»“æœæ‹·è´åˆ°åŸæ•°ç»„ä¸­
 }
 
-void mergeSort(vector<int >&array, int begin, int end) // µİ¹éÊµÏÖ¹é²¢ÅÅĞò
+void mergeSort(vector<int >&array, int begin, int end) // é€’å½’å®ç°å½’å¹¶æ’åº
 {
 	if(begin>=end)
 		return ;
 	int mid = (begin + end) / 2 ;
-	mergeSort(array, begin, mid); // ÏÈ¹é²¢ÅÅĞò×óÇø¼ä
-	mergeSort(array, mid+1, end); // ÔÙ¹é²¢ÅÅĞòÓÒÇø¼ä
-	merge(array, begin, mid, end); // ºÏ²¢×óÓÒÇø¼ä
+	mergeSort(array, begin, mid); // å…ˆå½’å¹¶æ’åºå·¦åŒºé—´
+	mergeSort(array, mid+1, end); // å†å½’å¹¶æ’åºå³åŒºé—´
+	merge(array, begin, mid, end); // åˆå¹¶å·¦å³åŒºé—´
 }
 
-void mergeSort2(vector<int >&array) // ·Çµİ¹éÊµÏÖ¹é²¢ÅÅĞò
+void mergeSort2(vector<int >&array) // éé€’å½’å®ç°å½’å¹¶æ’åº
 {
-	int len = array.size(); // ¼ÆËãÊı×é³¤¶È
-	for(int i=1;i<len;i=i*2) // ÉèÖÃ²½³¤Îª1,2,4,8...
+	int len = array.size(); // è®¡ç®—æ•°ç»„é•¿åº¦
+	for(int i=1;i<len;i=i*2) // è®¾ç½®æ­¥é•¿ä¸º1,2,4,8...
 	{
 		for(int j=0;j+2*i-1<len;j=j+2*i) 
-			merge(array, j, j+i-1, j+2*i-1); // ¹é²¢ÏàÁÚÁ½¸öÊı×é
+			merge(array, j, j+i-1, j+2*i-1); // å½’å¹¶ç›¸é‚»ä¸¤ä¸ªæ•°ç»„
 		if(j<len)
-			merge(array, j, j+i-1, len-1); // ¹é²¢×îºóÊ£ÓàµÄÁ½¸öÊı×é£¨ÆäÖĞÒ»¸öÊı×é³¤¶ÈĞ¡ÓÚi£©
+			merge(array, j, j+i-1, len-1); // å½’å¹¶æœ€åå‰©ä½™çš„ä¸¤ä¸ªæ•°ç»„ï¼ˆå…¶ä¸­ä¸€ä¸ªæ•°ç»„é•¿åº¦å°äºiï¼‰
 	}
 }
 
